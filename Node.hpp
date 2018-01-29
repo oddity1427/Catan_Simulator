@@ -15,6 +15,7 @@ int const CITY 			= 2;
 
 struct Node{
 
+	int const id;
 	int settlement;
 	Player owner;
 

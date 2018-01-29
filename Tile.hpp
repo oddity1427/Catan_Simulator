@@ -5,6 +5,7 @@
 
 //each tile just has this information that other classes will access
 struct Tile {
+	int const id;
 	int resourceType;
 	int dieNumber;
 };

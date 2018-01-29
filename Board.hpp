@@ -11,16 +11,17 @@
 struct Board
 {
 	
-	//if you have a road you need to be able to find the roads that are connected to it and vice versa. maps used here to find the vector of connections;
-	//nodes also need to connect to Tiles
-	//TODO: find out why compiler error when I make the vectors of references to an instance instead of just to an instance
-	std::map<Road, std::vector<Node > > road2node;
+	//structures that capture the connections between pieces of the board.
+	//the key of the maps is an int const id in road, node, and tile.
+	//this will be inserted at creation and allow for the concrete location to be found for bugfixing
+	std::map<int, std::vector<Node& > > road2node;
+	std::map<int, std::vector<Road& > > node2road;
+	std::map<int, std::vector<Tile& > > node2tile;
 
-	std::map<Node, std::vector<Road > > node2road;
-
-	std::map<Node, std::vector<Tile > > node2tile;
-
-
+	// vectors to hold all of the salient board pieces;
+	std::vector<Node> allNodes;
+	std::vector<Tile> allTiles;
+	std::vector<Road> allRoads;
 
 };
 
