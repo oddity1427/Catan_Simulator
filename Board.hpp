@@ -23,6 +23,8 @@ struct Board
 	std::vector<Tile> allTiles;
 	std::vector<Road> allRoads;
 
+	void buildBoard();
+
 };
 
 #endif

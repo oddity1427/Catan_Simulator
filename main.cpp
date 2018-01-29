@@ -9,5 +9,7 @@
 #include "Tile.hpp"
 
 int main(){
-	return 1;
+	Board b;
+	b.buildBoard();
+	return 0;
 }
