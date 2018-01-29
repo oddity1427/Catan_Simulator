@@ -1,13 +1,22 @@
 #ifndef _NODE_HPP
 #define _NODE_HPP
 
-//the node itself doesn't need to have any particular idea where it is on the board
-//that will be handled in the board creation, nodes just need to tie together other data and classes
+//With the addition of the map class, Node effectively became a wrapper for the Settlement class
+//therefore, settlement has been deleted and its information adopted here
+
+#include "Player.hpp"
+
+//there are only 2 levels that a settlement can have, it will be useful to be able to reference them directly
+//added null option
+int const NO_BUILDING 	= 0;
+int const SETTLEMENT 	= 1;
+int const CITY 			= 2;
+
 
 struct Node{
 
-	//TODO: decide how nodes and roads are going to reference each other without including each other: current ideas include making a larger board class that includes most of the current classes as subclasses, or making some sort of map class that holds all of the pieces of the board and their relationships so that the classes like node don't need to be linked to their neighbors; solution may be some combination of those things
-	
+	int settlement;
+	Player owner;
 
 };
 
