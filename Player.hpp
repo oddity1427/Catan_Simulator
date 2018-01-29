@@ -2,10 +2,12 @@
 #define _PLAYER_HPP
 
 //There are only ever four players.
-int const PLAYER_RED 	= 0;
-int const PLAYER_BLUE 	= 1;
-int const PLAYER_WHITE 	= 2;
-int const PLAYER_ORANGE = 3;
+//updated with a null version so that roads( and others ) can be created but unowned
+int const NO_PLAYER 	= 0;
+int const PLAYER_RED 	= 1;
+int const PLAYER_BLUE 	= 2;
+int const PLAYER_WHITE 	= 3;
+int const PLAYER_ORANGE = 4;
 
 //right now there is not much to players other than that they exist
 //this will just be used currently so that buildings and roads can have owners
