@@ -2,7 +2,8 @@
 #include <iterator> 
 #include <algorithm>
 
-Board::buildBoard(){
+
+Board::Board() {
 
 	//The pool of 19 resources (including desert/noresource) that each tile is randomly assigned
 	std::vector<int> tileTypePool = {NO_RESOURCE, STONE, STONE, STONE, BRICK, BRICK, BRICK, WHEAT, WHEAT, WHEAT, WHEAT, SHEEP, SHEEP, SHEEP, SHEEP, WOOD, WOOD, WOOD, WOOD};
@@ -19,17 +20,17 @@ Board::buildBoard(){
 	}
 	//both vectors should have 19 randomized elements with 0 in the same place in both;
 	for(int i = 0; i < 19; i++){
-		this.allTiles.push_back({i, tileTypePool[i], tileNumberPool[i]});
+		this->allTiles.push_back(Tile t = {i, tileTypePool[i], tileNumberPool[i]});
 	}//tiles should be allocated now, though not tied to anything else through relationships
 
 	//need to initialize all of the roads now
 	for(int i = 0; i < 72; i++){
-		this.allRoads.push_back({i, 0});
+		this->allRoads.push_back(Road r = {i, 0});
 	}
 
 	//nodes too
 	for(int i = 0; i < 54; i++){
-		this.allNodes.push_back({i, 0, 0});
+		this->allNodes.push_back(Node n = {i, 0, 0});
 	}
 	
 }
