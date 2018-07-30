@@ -1,5 +1,5 @@
-#ifndef _TILE_HPP
-#define _TILE_HPP
+#ifndef TILE_HPP_FLAG
+#define TILE_HPP_FLAG
 
 #include "Resource.hpp"
 

@@ -1,5 +1,5 @@
-#ifndef _PLAYER_HPP
-#define _PLAYER_HPP
+#ifndef PLAYER_HPP_FLAG
+#define PLAYER_HPP_FLAG
 
 //There are only ever four players.
 //updated with a null version so that roads( and others ) can be created but unowned

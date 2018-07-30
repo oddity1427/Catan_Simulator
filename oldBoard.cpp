@@ -1,3 +1,6 @@
+#ifndef old_BOARD_CPP_FLAG 
+#define old_BOARD_CPP_FLAG
+
 #include "Board.hpp"
 #include <iterator> 
 #include <algorithm>
@@ -34,3 +37,5 @@ Board::Board() {
 	}
 	
 }
+
+#endif

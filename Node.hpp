@@ -8,14 +8,14 @@
 
 //there are only 2 levels that a settlement can have, it will be useful to be able to reference them directly
 //added null option
-int const NO_BUILDING 	= 0;
-int const SETTLEMENT 	= 1;
-int const CITY 			= 2;
+const int NO_BUILDING 	= 0;
+const int SETTLEMENT 	= 1;
+const int CITY 			= 2;
 
 
 struct Node{
 
-	int const id;
+	const int id;
 	int settlement;
 	Player owner;
 

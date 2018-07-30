@@ -1,5 +1,5 @@
-#ifndef _ROAD_HPP
-#define _ROAD_HPP
+#ifndef ROAD_HPP_FLAG
+#define ROAD_HPP_FLAG
 
 int const NO_ROAD 	= 0;
 int const ROAD 		= 1;

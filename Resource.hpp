@@ -1,5 +1,5 @@
-#ifndef _RESOURCE_HPP
-#define _RESOURCE_HPP
+#ifndef RESOURCE_HPP_FLAG
+#define RESOURCE_HPP_FLAG
 
 //define names for all of the tile types in the game
 int const NO_RESOURCE 	= 0;
