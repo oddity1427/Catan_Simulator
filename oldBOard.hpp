@@ -14,9 +14,9 @@ struct Board
 	//structures that capture the connections between pieces of the board.
 	//the key of the maps is an int const id in road, node, and tile.
 	//this will be inserted at creation and allow for the concrete location to be found for bugfixing
-	std::map<int, std::vector<Node&> > road2node;
-	std::map<int, std::vector<Road&> > node2road;
-	std::map<int, std::vector<Tile&> > node2tile;
+	std::map<int, std::vector<Node&>& > road2node;
+	std::map<int, std::vector<Road&>& > node2road;
+	std::map<int, std::vector<Tile&>& > node2tile;
 
 	// vectors to hold all of the salient board pieces;
 	std::vector<Node> allNodes;
