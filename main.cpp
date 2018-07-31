@@ -1,15 +1,15 @@
 //Right now just being used to check if all of the files will compile or if I've done something really wrong
 
-#include "Board.hpp"
-#include "Game.hpp"
 #include "Node.hpp"
-#include "Player.hpp"
-#include "Resource.hpp"
-#include "Road.hpp"
 #include "Tile.hpp"
+#include "Player.hpp"
+#include "Road.hpp"
+#include "Node.hpp"
 
 int main(){
-	Board b{};
+	Node n = new Node(1, Player(1));
+	Tile t = new Tile(1);
+	Road r = new Road(-1);
 	
 	return 0;
 }

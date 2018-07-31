@@ -1,10 +1,10 @@
 #ifndef _NODE_HPP
 #define _NODE_HPP
 
-//With the addition of the map class, Node effectively became a wrapper for the Settlement class
-//therefore, settlement has been deleted and its information adopted here
-
 #include "Player.hpp"
+#include "Tile.hpp"
+#include "Road.hpp"
+#include <vector>
 
 //there are only 2 levels that a settlement can have, it will be useful to be able to reference them directly
 //added null option
@@ -13,11 +13,16 @@ const int SETTLEMENT 	= 1;
 const int CITY 			= 2;
 
 
-struct Node{
+class Node{
+public:
 
-	const int id;
+	int id;
 	int settlement;
-	Player owner;
+	Player* owner;
+	std::vector<Tile> tiles; 
+	std::vector<Road> roads;
+
+	Node(int, Player);
 
 };
 

@@ -16,6 +16,7 @@ int const PLAYER_ORANGE = 4;
 struct Player{
 
 	int color;
+	Player(int);
 
 };
 
