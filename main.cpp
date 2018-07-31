@@ -7,9 +7,9 @@
 #include "Node.hpp"
 
 int main(){
-	Node n = new Node(1, Player(1));
-	Tile t = new Tile(1);
-	Road r = new Road(-1);
+	Node n(1, Player(1));
+	Tile t(1);
+	Road r(-1);
 	
 	return 0;
 }

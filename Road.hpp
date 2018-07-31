@@ -1,6 +1,8 @@
 #ifndef ROAD_HPP_FLAG
 #define ROAD_HPP_FLAG
 
+#include "Player.hpp"
+
 int const NO_ROAD 	= 0;
 int const ROAD 		= 1;
 
