@@ -14,19 +14,19 @@ void Node::setPlayer(Player * p){
 }
 
 void Node::addTile(Tile * t){
-	tiles.push_back(t);
+	conTiles.push_back(t);
 }
 
 void Node::addRoad(Road * r){
-	roads.push_back(r);
+	conRoads.push_back(r);
 }
 
 std::vector<Tile *> *  Node::getTiles(){
-	return &tiles;
+	return &conTiles;
 }
 
 std::vector<Road* > * Node::getRoads(){
-	return &roads;
+	return &conRoads;
 }
 
 Player * Node::getOwner(){

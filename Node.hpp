@@ -1,17 +1,20 @@
 #ifndef _NODE_HPP
 #define _NODE_HPP
 
-#include "Player.hpp"
-#include "Tile.hpp"
-#include "Road.hpp"
+//commented out to make room for the forward declaration testing below
+//#include "Player.hpp"
+//#include "Tile.hpp"
+//#include "Road.hpp"
 #include <vector>
 
-//there are only 2 levels that a settlement can have, it will be useful to be able to reference them directly
-//added null option
 const int NO_BUILDING 	= 0;
 const int SETTLEMENT 	= 1;
 const int CITY 			= 2;
 
+//testing out forward inclusions to remove circular dependencies; seeAlso Tile.hpp
+class Tile;
+class Player;
+class Road;
 
 class Node{
 private:
@@ -20,8 +23,8 @@ private:
 	int building;
 	bool claimed; 
 	Player * owner;
-	std::vector<Tile *> tiles; 
-	std::vector<Road *> roads;
+	std::vector<Tile *> conTiles; 
+	std::vector<Road *> conRoads;
 
 public:
 
