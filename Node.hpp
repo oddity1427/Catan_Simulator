@@ -14,15 +14,28 @@ const int CITY 			= 2;
 
 
 class Node{
-public:
+private:
 
 	int id;
-	int settlement;
-	Player* owner;
-	std::vector<Tile> tiles; 
-	std::vector<Road> roads;
+	int building;
+	bool claimed; 
+	Player * owner;
+	std::vector<Tile *> tiles; 
+	std::vector<Road *> roads;
 
-	Node(int, Player);
+public:
+
+	Node(int);
+
+	void setPlayer(Player *);
+	void addTile(Tile *);
+	void addRoad(Road *);
+
+	std::vector<Tile *>* getTiles();
+	std::vector<Road *>* getRoads();
+	Player * getOwner(); 
+	bool isClaimed();
+	int getBuilding(); 
 
 };
 

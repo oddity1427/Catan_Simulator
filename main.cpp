@@ -7,7 +7,7 @@
 #include "Node.hpp"
 
 int main(){
-	Node n(1, Player(1));
+	Node n(1);
 	Tile t(1);
 	Road r(-1);
 	
