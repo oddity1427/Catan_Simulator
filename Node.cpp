@@ -21,6 +21,11 @@ void Node::addRoad(Road * r){
 	conRoads.push_back(r);
 }
 
+void Node::setPortType(Resource r){
+	portHere = true;
+	portType = r;
+}
+
 std::vector<Tile *> *  Node::getTiles(){
 	return &conTiles;
 }
@@ -39,6 +44,14 @@ bool Node::isClaimed(){
 
 int Node::getBuilding(){
 	return building;
+}
+
+bool Node::hasPort(){
+	return portHere;
+}
+
+Resource Node::getPortType(){
+	return portType;
 }
 
 #endif
