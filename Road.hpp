@@ -9,13 +9,13 @@ class Player;
 
 class Road{
 private:
-	int id;
+	std::vector<int> id;
 	bool taken;
 	Player* owner;
 	std::vector<Node *> conNodes;
 
 public:
-	Road(int);
+	Road(std::vector<int>);
 
 	void setOwner(Player *);
 	void addNode(Node *);
@@ -23,6 +23,8 @@ public:
 	Node * getOtherNode(Node *);
 	Player * getOwner();
 	bool isTaken();
+
+	const std::vector<int> getID();
 
 
 

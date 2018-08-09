@@ -4,7 +4,7 @@
 #include "Road.hpp"
 #include <iostream>
 
-Road::Road(int ID){
+Road::Road(std::vector<int> ID){
 	id = ID;
 	taken = false;
 }
@@ -35,6 +35,10 @@ Node * Road::getOtherNode(Node * n_p){
 	//not really a great way to do errors, but simple, and works for something that I see in advance has the potential to crash
 	//this comment will stand as a marker for placs that have priority when implementing error handling 
 	std::cout << "Error, all Nodes * in conNodes are equal to input Node *  ; Road.cpp:35";
+}
+
+const std::vector<int> Road::getID(){
+	return id;
 }
 
 #endif

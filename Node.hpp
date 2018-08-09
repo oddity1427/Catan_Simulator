@@ -22,7 +22,7 @@ class Road;
 class Node{
 private:
 
-	int id;
+	std::vector<int> id;
 	int building;
 	bool claimed;
 	bool portHere;
@@ -33,7 +33,7 @@ private:
 
 public:
 
-	Node(int);
+	Node(std::vector<int>);
 
 	void setPlayer(Player *);
 	void addTile(Tile *);
@@ -50,6 +50,9 @@ public:
 
 	bool hasPort();
 	Resource getPortType();
+
+	const std::vector<int> getID();
+	
 
 };
 

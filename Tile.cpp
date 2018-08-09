@@ -3,7 +3,7 @@
 
 #include "Tile.hpp"
 
-Tile::Tile(int ID){
+Tile::Tile(std::vector<int> ID){
 	id = ID;
 }
 
@@ -30,6 +30,10 @@ int Tile::getDieNumber(){
 
 std::vector<Node *>* Tile::getConNodes(){
 	return &conNodes;
+}
+
+const std::vector<int> Tile::getID(){
+	return id;
 }
 
 #endif

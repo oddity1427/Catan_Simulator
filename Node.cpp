@@ -3,7 +3,7 @@
 
 #include 	"Node.hpp"
 
-Node::Node(int ID){
+Node::Node(std::vector<int> ID){
 	id = ID;
 
 }
@@ -52,6 +52,10 @@ bool Node::hasPort(){
 
 Resource Node::getPortType(){
 	return portType;
+}
+
+const std::vector<int> Node::getID(){
+	return id;
 }
 
 #endif

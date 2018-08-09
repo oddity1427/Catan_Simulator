@@ -13,14 +13,14 @@ class Node;
 
 class Tile {
 private:
-	int id;
+	std::vector<int> id;
 	int resourceType;
 	int dieNumber;
 
 	std::vector<Node *> conNodes;
 
 public:
-	Tile(int);
+	Tile(std::vector<int>);
 
 	void setResourceType(int);
 	void setDieNumber(int);
@@ -29,6 +29,8 @@ public:
 	int getResourceType();
 	int getDieNumber();
 	std::vector<Node * > * getConNodes();
+
+	const std::vector<int> getID();
 
 };
 
