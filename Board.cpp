@@ -4,6 +4,7 @@
 #include "Board.hpp"
 #include <iterator>
 #include <algorithm>
+#include <iostream>
 
 Board::Board(){
 	//each of the following reference vector arrays is actually just 3 basis vectors mirrored, but it will be simpler to treat them as discrete directions.
@@ -85,6 +86,7 @@ void Board::buildBoard(int type, int param){
 		}
 		
 	}
+	std::cout << masterTiles.size();
 }
 
 void Board::buildBoard(std::vector<int> xcoor, std::vector<int> ycoor, std::vector<int> zcoor){
