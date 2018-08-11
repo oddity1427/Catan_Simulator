@@ -15,9 +15,10 @@ int const REGULAR    = 1;
 class Board{
 private:
 	std::vector<Tile> masterTiles;
-	std::vector<Node> masterNode;
-	std::vector<Road> masterRoad;
+	std::vector<Node> masterNodes;
+	std::vector<Road> masterRoads;
 
+	std::vector<int> addVect(std::vector<int>*, std::vector<int>*);
 
 public:
 	Board();
