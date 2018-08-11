@@ -18,7 +18,13 @@ private:
 	std::vector<Node> masterNodes;
 	std::vector<Road> masterRoads;
 
+	std::vector<std::vector<int>> tile2roadVectors;
+	std::vector<std::vector<int>> tile2nodeVectors;
+	std::vector<std::vector<int>> tile2tileVectors;
+
 	std::vector<int> addVect(std::vector<int>*, std::vector<int>*);
+	std::vector<int> addVect(std::vector<int>, std::vector<int>);
+	std::vector<int> tileTileClockDir(std::vector<int>);
 
 public:
 	Board();
