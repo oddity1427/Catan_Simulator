@@ -71,9 +71,11 @@ void Board::buildBoard(int type, int param){
 						newLeaves.push_back(&masterTiles[masterTiles.size() - 1]);
 					}
 					if(i > 1){
-						//TODO::the branch at a level happens here
+						masterTiles.push_back(*(new Tile(addVect(tileTileClockDir(dir), (oldLeaves[oldLeaves.size() - 1])->getID()))));
+						newLeaves.push_back(&masterTiles[masterTiles.size() - 1]);	
 					}
 					oldLeaves = newLeaves;
+					newLeaves.clear();
 				}
 				//reset for the next direction
 				oldLeaves.clear();
