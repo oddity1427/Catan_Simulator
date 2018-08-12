@@ -43,7 +43,7 @@ void Board::buildBoard(){
 
 void Board::buildBoard(int type, int param){
 
-
+ 
 
 
 	if(type == STANDARD){
@@ -58,22 +58,25 @@ void Board::buildBoard(int type, int param){
 
 		//always create center node
 		
-		masterTiles.push_back(*(new Tile(std::vector<int>(3,0))));
-		Tile * origin = &(masterTiles[0]);
+		masterTiles[std::vector<int>(3,0)] = ((new Tile(std::vector<int>(3,0))));
+		
+		Tile * origin = (masterTiles[std::vector<int>(3,0)]);
 		std::vector<Tile *> oldLeaves;
 		std::vector<Tile *> newLeaves;
 		oldLeaves.push_back(origin);
 
 		if(param >= 1){
 			for (std::vector<int> dir : tile2tileVectors){
-				for(int i = 1; i <= param ; i++){
+				for(int i = 1; i <= param ; i++){	
 					for(Tile * old : oldLeaves){
-						masterTiles.push_back(*(new Tile(addVect(old->getID(), dir))));
-						newLeaves.push_back(&masterTiles[masterTiles.size() - 1]);
+						std::vector<int> temp = addVect(old->getID(), dir);
+						masterTiles[temp] = ((new Tile(temp)));
+						newLeaves.push_back(masterTiles[temp]);
 					}
 					if(i > 1){
-						masterTiles.push_back(*(new Tile(addVect(tileTileClockDir(dir), (oldLeaves[oldLeaves.size() - 1])->getID()))));
-						newLeaves.push_back(&masterTiles[masterTiles.size() - 1]);	
+						std::vector<int> temp = addVect(tileTileClockDir(dir), (oldLeaves[oldLeaves.size() - 1])->getID());
+						masterTiles[temp] = ((new Tile(temp)));
+						newLeaves.push_back(masterTiles[temp]);	
 					}
 					oldLeaves = newLeaves;
 					newLeaves.clear();
@@ -84,9 +87,11 @@ void Board::buildBoard(int type, int param){
 				oldLeaves.push_back( origin);
 			}
 		}
-		
+		//prints the total number of tiles created
+		//std::cout << masterTiles.size() << "\n";
 	}
-	std::cout << masterTiles.size();
+	fillNodes();
+	fillRoads();
 }
 
 void Board::buildBoard(std::vector<int> xcoor, std::vector<int> ycoor, std::vector<int> zcoor){
@@ -96,7 +101,7 @@ void Board::buildBoard(std::vector<int> xcoor, std::vector<int> ycoor, std::vect
 std::vector<int> Board::addVect(std::vector<int> * vec1, std::vector<int> * vec2){
 	std::vector<int> output;
 	for(int i = 0; i < 3; i++){
-		output.push_back((*vec1)[i] + (*vec1)[i]);
+		output.push_back((*vec1)[i] + (*vec2)[i]);
 	}
 	return output;
 }
@@ -104,7 +109,7 @@ std::vector<int> Board::addVect(std::vector<int> * vec1, std::vector<int> * vec2
 std::vector<int> Board::addVect(std::vector<int>  vec1, std::vector<int>  vec2){
 	std::vector<int> output;
 	for(int i = 0; i < 3; i++){
-		output.push_back((vec1)[i] + (vec1)[i]);
+		output.push_back((vec1)[i] + (vec2)[i]);
 	}
 	return output;
 }
@@ -118,5 +123,13 @@ std::vector<int> Board::tileTileClockDir(std::vector<int> current){
 	}
 	//must then match the last dir, so return the first
 	return tile2tileVectors[0];
+}
+
+void Board::fillRoads(){
+
+}
+
+void Board::fillNodes(){
+
 }
 #endif

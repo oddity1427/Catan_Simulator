@@ -2,6 +2,7 @@
 #define BOARD_HPP_FLAG
 
 #include <vector>
+#include <map>
 #include "Node.hpp"
 #include "Road.hpp"
 #include "Tile.hpp"
@@ -14,17 +15,20 @@ int const REGULAR    = 1;
 
 class Board{
 private:
-	std::vector<Tile> masterTiles;
-	std::vector<Node> masterNodes;
-	std::vector<Road> masterRoads;
 
-	std::vector<std::vector<int>> tile2roadVectors;
-	std::vector<std::vector<int>> tile2nodeVectors;
-	std::vector<std::vector<int>> tile2tileVectors;
+	std::map<std::vector<int>,Tile *> 	masterTiles;
+	std::map<std::vector<int>,Road *> 	masterRoads;
+	std::map<std::vector<int>,Node *> 	masterNodes;
+
+	std::vector<std::vector<int>> 		tile2roadVectors;
+	std::vector<std::vector<int>> 		tile2nodeVectors;
+	std::vector<std::vector<int>> 		tile2tileVectors;
 
 	std::vector<int> addVect(std::vector<int>*, std::vector<int>*);
 	std::vector<int> addVect(std::vector<int>, std::vector<int>);
 	std::vector<int> tileTileClockDir(std::vector<int>);
+	void fillNodes();
+	void fillRoads();
 
 public:
 	Board();

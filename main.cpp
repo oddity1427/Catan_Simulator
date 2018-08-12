@@ -6,7 +6,7 @@
 
 int main(){
 	Board b;
-	b.buildBoard();
+	b.buildBoard(0,0);
 	
 	return 0;
 }
