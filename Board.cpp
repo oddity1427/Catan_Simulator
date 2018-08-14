@@ -95,7 +95,69 @@ void Board::buildBoard(int type, int param){
 }
 
 void Board::buildBoard(std::vector<int> xcoor, std::vector<int> ycoor, std::vector<int> zcoor){
-	//TODO: this logic is going to be a bit more complicated than the others
+	//TODO: implement pseudocode
+	// create a vector of coordinates out of the individual vectors, call it unfound
+	std::vector<std::vector<int>> unFound;
+	for(int i = 0; i < xcoor.size(); i++){
+		std::vector<int> temp;
+		temp.push_back(xcoor[i]);
+		temp.push_back(ycoor[i]);
+		temp.push_back(zcoor[i]);
+		unfound.push_back(temp);
+	}
+
+	// create an empty vector of coordinates, found;
+	std::vector<std::vector<int>> found;
+	// create a vector of coordinate directions toThis;
+	std::vector<std::vector<int>> toFound;
+
+	// start with the first unfound
+	// 	check every cardinal direction for an unfound spot
+	// 	if none are found one away, look at all two away, etc...
+	// 	once an unfound is found:
+	// 		add the unfound to found
+	// 		add the direction it was found in at the same index in toThis
+	// 		repeat until all are found and have a direction pointing to them
+	std::vector<int> findFrom  =  unFound.pop_back();
+	while(unfound.size >= 1){
+		//does not support side lengths greater than 100 just to avoid infinite loops
+		std::vector<std::vector<int>> candidates;
+		for(int i = 0; i < 6; i++){
+			candidates.push_back(findFrom);
+		}
+
+		for(int i = 0; i < 100; i++){
+			for(int j = 0; j < 6; j++){
+				candidates[j] = addVect(candidates[j], tile2tileVectors[j]);
+				for(int k = 0; k < unFound.size(); size++){
+					if(candidates[j] == unfound[k]){
+						//mark findFrom in toFound
+						//mark direction in toFound
+						//find and set up next tile to search from from one found
+					}
+				}
+			}
+		}
+	}
+	//have to then manually push the last tile locattion and direction, because have to look at first tile that was already found
+	
+
+
+
+
+
+
+
+
+
+
+	// use found, and toTHis vectors to step through the perimeter of the board
+	// 	add the corresponding tiles to masterTiles
+
+	// start at the origin: must be inside
+	// create every tile next to it if it does not exist
+	// tell every node created to create nodes next to it if they do not exist.
+	// the board will now be populated
 }
 
 std::vector<int> Board::addVect(std::vector<int> * vec1, std::vector<int> * vec2){
@@ -126,10 +188,10 @@ std::vector<int> Board::tileTileClockDir(std::vector<int> current){
 }
 
 void Board::fillRoads(){
-
+	//TODO::create this algorithm
 }
 
 void Board::fillNodes(){
-
+	//TODO::create this algorithm 
 }
 #endif
