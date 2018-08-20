@@ -109,7 +109,8 @@ void Board::buildBoard(std::vector<int> xcoor, std::vector<int> ycoor, std::vect
 	// create an empty vector of coordinates, found;
 	std::vector<std::vector<int>> found;
 	// create a vector of coordinate directions toThis;
-	std::vector<std::vector<int>> toFound;
+	std::vector<std::vector<int>> toNext;
+	std::vector<int> distance;
 
 	// start with the first unfound
 	// 	check every cardinal direction for an unfound spot
@@ -131,17 +132,53 @@ void Board::buildBoard(std::vector<int> xcoor, std::vector<int> ycoor, std::vect
 				candidates[j] = addVect(candidates[j], tile2tileVectors[j]);
 				for(int k = 0; k < unFound.size(); size++){
 					if(candidates[j] == unfound[k]){
-						//mark findFrom in toFound
+						found.push_back(findFrom);
+						toNext.push_back(tile2tileVectors[j]);
+						distance.push_back(i);
+
+						findFrom = unFound[k];
+						unfound.erase(k);
+						//mark findFrom in Found
+						//remove from unfoundk
 						//mark direction in toFound
 						//find and set up next tile to search from from one found
 					}
 				}
 			}
 		}
+		candidates.clear();
 	}
+	//have to make a new candidates list as before, but only check for the first vector
+	for(int j = 0; j < 6; j++){
+			candidates.push_back(findFrom);
+	}
+
+	for(int i = 0; i < 100; i++){
+		for(int j = 0; j < 6; j++){
+			candidates[j] = addVect(candidates[j], tile2tileVectors[j]);
+			if(candidates[j] == found(0)){
+				found.push_back(findFrom);
+				toNext.push_back(tile2tileVectors[j]);
+				distance.push_back(i);
+			}
+		}
+	}
+
+
 	//have to then manually push the last tile locattion and direction, because have to look at first tile that was already found
 	
-
+	//for the purposes of testing print out all of the information that this coordinate tracing comes up with
+	for(int i = 0; i < found.size(); i++){
+		for(int j = 0; j < 3; j++){
+			std::cout << found[i][j] << ", ";
+		}
+		std::cout << "; ";
+		for(int j = 0; j < 3; j++){
+			std::cout << toNext[i][j] << ", ";
+		}
+		std::cout << "; ";
+		std::cout << distance[i] << "\n";
+	}
 
 
 
