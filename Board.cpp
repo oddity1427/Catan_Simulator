@@ -7,7 +7,7 @@
 #include <iostream>
 
 Board::Board(){
-	//each of the following reference vector arrays is actually just 3 basis vectors mirrored, but it will be simpler to treat them as discrete directions.
+		//each of the following reference vector arrays is actually just 3 basis vectors mirrored, but it will be simpler to treat them as discrete directions.
 //The coordinate system that I am using is shown in hexCoordinates.png
 	//really it is a single triangular grid that all possible entities sit on.
 	//This ensures unique ids but is not useful to understand because there are 3 separate types of entites sitting on disparate places.
@@ -53,10 +53,6 @@ void Board::buildBoard(int type, int param){
 			//TODO: figure out what the coordinates for the tiles in the six player game are and call that constructor here
 		}
 	}else if(type == REGULAR){
-		//build out the tiles; each direction makes a tree with one split on the rightmost brach after the first nodes are created
-		
-
-		//always create center node
 		
 		masterTiles[std::vector<int>(3,0)] = ((new Tile(std::vector<int>(3,0))));
 		
@@ -87,17 +83,13 @@ void Board::buildBoard(int type, int param){
 				oldLeaves.push_back( origin);
 			}
 		}
-		//prints the total number of tiles created
-		//std::cout << masterTiles.size() << "\n";
 	}
 	fillNodes();
 	fillRoads();
 }
 
 void Board::buildBoard(std::vector<int> xcoor, std::vector<int> ycoor, std::vector<int> zcoor){
-	//TODO:: change finding alforithm to only accept ordered coordinates; finding by the closest one is not sufficient for very irregular board shapes.
 	
-	// create a vector of coordinates out of the individual vectors, call it unfound
 	std::vector<std::vector<int>> ordered;
 	for(int i = 0; i < xcoor.size(); i++){
 		std::vector<int> temp;
@@ -110,7 +102,6 @@ void Board::buildBoard(std::vector<int> xcoor, std::vector<int> ycoor, std::vect
 	std::vector<std::vector<int>> toNext;
 	std::vector<int> distance;
 
-	//find the direction for all but the last entry
 	for(int findFrom = 0; findFrom < ordered.size() - 1; findFrom++){
 		std::vector<std::vector<int>> candidates;
 		for(int i = 0; i < 6; i++ ){
@@ -122,11 +113,6 @@ void Board::buildBoard(std::vector<int> xcoor, std::vector<int> ycoor, std::vect
 			countDist++;
 			for(int dir = 0; dir < 6; dir++){
 				candidates[dir] = addVect(candidates[dir], tile2tileVectors[dir]);
-				std::cout << "candidates: ";
-				printVect(candidates[dir]);
-				std::cout << "target: ";
-				printVect(ordered[findFrom + 1]);
-				std::cout << "\n";
 				if(ordered[findFrom + 1] == candidates[dir]){
 					toNext.push_back(tile2tileVectors[dir]);
 					distance.push_back(countDist);
@@ -135,10 +121,8 @@ void Board::buildBoard(std::vector<int> xcoor, std::vector<int> ycoor, std::vect
 
 			}
 		}
-		std::cout << "makes it past the while loop one time\n";
 	}
 
-	//have to then manually push the last tile locattion and direction, because have to look at first tile that was already found
 	std::vector<std::vector<int>> candidates;
 		for(int i = 0; i < 6; i++ ){
 			candidates.push_back(ordered[ordered.size() - 1]);
@@ -156,24 +140,10 @@ void Board::buildBoard(std::vector<int> xcoor, std::vector<int> ycoor, std::vect
 				}
 			}
 		}
-	//for the purposes of testing print out all of the information that this coordinate tracing comes up with
-	for(int i = 0; i < ordered.size(); i++){
-		
-		for(int j = 0; j < 3; j++){
-			std::cout << toNext[i][j] << ", ";
-		}
-		std::cout << "; ";
-		std::cout << distance[i] << "\n";
-	}
+	
 
 
-
-
-
-
-
-
-
+	//TODO:
 	// use found, and toTHis vectors to step through the perimeter of the board
 	// 	add the corresponding tiles to masterTiles
 
