@@ -28,7 +28,7 @@ Board::Board(){
 	std::vector<int> tr_v_1 = {1,	0,	-1}; 	tile2roadVectors.push_back(tr_v_1);
 	std::vector<int> tr_v_2 = {0,	1,	-1}; 	tile2roadVectors.push_back(tr_v_2);
 	std::vector<int> tr_v_3 = {-1,	1,	0}; 	tile2roadVectors.push_back(tr_v_3);
-	std::vector<int> tr_v_4 = {1,	0,	1}; 	tile2roadVectors.push_back(tr_v_4);
+	std::vector<int> tr_v_4 = {-1,	0,	1}; 	tile2roadVectors.push_back(tr_v_4);
 	std::vector<int> tr_v_5 = {0,	-1,	1}; 	tile2roadVectors.push_back(tr_v_5);
 
 //explicitly create the tiletotile vector
@@ -122,13 +122,20 @@ void Board::buildBoard(std::vector<int> xcoor, std::vector<int> ycoor, std::vect
 			countDist++;
 			for(int dir = 0; dir < 6; dir++){
 				candidates[dir] = addVect(candidates[dir], tile2tileVectors[dir]);
+				std::cout << "candidates: ";
+				printVect(candidates[dir]);
+				std::cout << "target: ";
+				printVect(ordered[findFrom + 1]);
+				std::cout << "\n";
 				if(ordered[findFrom + 1] == candidates[dir]){
 					toNext.push_back(tile2tileVectors[dir]);
 					distance.push_back(countDist);
 					foundNext = true;
 				}
+
 			}
 		}
+		std::cout << "makes it past the while loop one time\n";
 	}
 
 	//have to then manually push the last tile locattion and direction, because have to look at first tile that was already found
@@ -209,5 +216,12 @@ void Board::fillRoads(){
 
 void Board::fillNodes(){
 	//TODO::create this algorithm 
+}
+
+void Board::printVect(std::vector<int> in){
+	for(int i = 0; i < in.size(); i++){
+		std::cout << in[i] << ", ";
+	}
+	std::cout << " ";
 }
 #endif

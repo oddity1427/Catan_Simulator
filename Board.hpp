@@ -15,6 +15,7 @@ int const REGULAR    = 1;
 
 class Board{
 private:
+	void printVect(std::vector<int>);
 
 	std::map<std::vector<int>,Tile *> 	masterTiles;
 	std::map<std::vector<int>,Road *> 	masterRoads;
@@ -32,7 +33,7 @@ public:
 	std::vector<std::vector<int>> 		tile2nodeVectors;
 	std::vector<std::vector<int>> 		tile2tileVectors;
 
-	
+
 	Board();
 	void buildBoard();
 	void buildBoard(int, int);
