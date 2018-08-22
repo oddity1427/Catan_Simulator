@@ -98,92 +98,60 @@ void Board::buildBoard(std::vector<int> xcoor, std::vector<int> ycoor, std::vect
 	//TODO:: change finding alforithm to only accept ordered coordinates; finding by the closest one is not sufficient for very irregular board shapes.
 	
 	// create a vector of coordinates out of the individual vectors, call it unfound
-	std::vector<std::vector<int>> unFound;
+	std::vector<std::vector<int>> ordered;
 	for(int i = 0; i < xcoor.size(); i++){
 		std::vector<int> temp;
 		temp.push_back(xcoor[i]);
 		temp.push_back(ycoor[i]);
-		temp.push_b
-		std::vector<int> temp;
-		temp.push_back(xcoor[i]);ack(zcoor[i]);
-		unFound.push_back(temp);
-	}ought definition
-	std::cout << unFound.size() << " initial unfound \n";
+		temp.push_back(zcoor[i]);
+		ordered.push_back(temp);
+	}
 
-	// create an empty vector of coordinates, found;
-	std::vector<std::vector<int>> found;
-	// create a vector of coordinate directions toThis;
 	std::vector<std::vector<int>> toNext;
 	std::vector<int> distance;
 
-	// start with the first unfound
-	// 	check every cardinal direction for an unfound spot
-	// 	if none are found one away, look at all two away, etc...
-	// 	once an unfound is found:
-	// 		add the unfound to found
-	// 		add the direction it was found in at the same index in toThis
-	// 		repeat until all are found and have a direction pointing to them
-	std::vector<int> findFrom  =  unFound[unFound.size() -1];
-	unFound.pop_back();
-	std::cout << unFound.size() << " unfound after removing last element \n";
-	std::vector<std::vector<int>> candidates;
-	while(unFound.size() >= 1){
-		//does not support side lengths greater than 100 just to avoid infinite loops
-		
-		for(int i = 0; i < 6; i++){
-			candidates.push_back(findFought definitionrom);
+	//find the direction for all but the last entry
+	for(int findFrom = 0; findFrom < ordered.size() - 1; findFrom++){
+		std::vector<std::vector<int>> candidates;
+		for(int i = 0; i < 6; i++ ){
+			candidates.push_back(ordered[findFrom]);
 		}
-
-		for(int i = 0; i < 100; i++){
-			for(int j = 0; j < 6; j++){
-				//this is to ensure that there is one entry for a findFrom; there may be multiple vertices that are the same distance away
-				bool foundAtRange = false;
-				candidates[j] = addVect(candidates[j], tile2tileVectors[j]);
-				for(int k = 0; k < unFound.size(); k++){
-					if(candidates[j] == unFound[k]){
-						found.push_back(findFrom);
-						toNext.push_back(tile2tileVectors[j]);
-						distance.push_back(i);
-
-						findFrom = unFound[k];
-						std::cout << unFound.size() << " just before erase operation \n";
-						unFound.erase(unFound.begin() + k);
-						//mark findFrom in Found
-						//remove from unfoundk
-						//mark direction in toFound
-						//find and set up next tile to search from from one found
-					}
+		bool foundNext = false;
+		int countDist = 0;
+		while(!foundNext){
+			countDist++;
+			for(int dir = 0; dir < 6; dir++){
+				candidates[dir] = addVect(candidates[dir], tile2tileVectors[dir]);
+				if(ordered[findFrom + 1] == candidates[dir]){
+					toNext.push_back(tile2tileVectors[dir]);
+					distance.push_back(countDist);
+					foundNext = true;
 				}
 			}
 		}
-		candidates.clear();
-		std::cout << unFound.size() << "\n";
 	}
-	//have to make a new candidates list as before, but only check for the first vector
-	for(int j = 0; j < 6; j++){
-			candidates.push_back(findFrom);
-	}
-
-	for(int i = 0; i < 100; i++){
-		for(int j = 0; j < 6; j++){
-			candidates[j] = addVect(candidates[j], tile2tileVectors[j]);
-			if(candidates[j] == found[0]){
-				found.push_back(findFrom);
-				toNext.push_back(tile2tileVectors[j]);
-				distance.push_back(i);
-			}
-		}
-	}
-
 
 	//have to then manually push the last tile locattion and direction, because have to look at first tile that was already found
-	
-	//for the purposes of testing print out all of the information that this coordinate tracing comes up with
-	for(int i = 0; i < found.size(); i++){
-		for(int j = 0; j < 3; j++){
-			std::cout << found[i][j] << ", ";
+	std::vector<std::vector<int>> candidates;
+		for(int i = 0; i < 6; i++ ){
+			candidates.push_back(ordered[ordered.size() - 1]);
 		}
-		std::cout << "; ";
+		bool foundNext = false;
+		int countDist = 0;
+		while(!foundNext){
+			countDist++;
+			for(int dir = 0; dir < 6; dir++){
+				candidates[dir] = addVect(candidates[dir], tile2tileVectors[dir]);
+				if(ordered[0] == candidates[dir]){
+					toNext.push_back(tile2tileVectors[dir]);
+					distance.push_back(countDist);
+					foundNext = true;
+				}
+			}
+		}
+	//for the purposes of testing print out all of the information that this coordinate tracing comes up with
+	for(int i = 0; i < ordered.size(); i++){
+		
 		for(int j = 0; j < 3; j++){
 			std::cout << toNext[i][j] << ", ";
 		}
