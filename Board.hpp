@@ -20,10 +20,6 @@ private:
 	std::map<std::vector<int>,Road *> 	masterRoads;
 	std::map<std::vector<int>,Node *> 	masterNodes;
 
-	std::vector<std::vector<int>> 		tile2roadVectors;
-	std::vector<std::vector<int>> 		tile2nodeVectors;
-	std::vector<std::vector<int>> 		tile2tileVectors;
-
 	std::vector<int> addVect(std::vector<int>*, std::vector<int>*);
 	std::vector<int> addVect(std::vector<int>, std::vector<int>);
 	std::vector<int> tileTileClockDir(std::vector<int>);
@@ -31,6 +27,12 @@ private:
 	void fillRoads();
 
 public:
+
+	std::vector<std::vector<int>> 		tile2roadVectors;
+	std::vector<std::vector<int>> 		tile2nodeVectors;
+	std::vector<std::vector<int>> 		tile2tileVectors;
+
+	
 	Board();
 	void buildBoard();
 	void buildBoard(int, int);

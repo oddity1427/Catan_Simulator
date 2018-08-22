@@ -95,16 +95,20 @@ void Board::buildBoard(int type, int param){
 }
 
 void Board::buildBoard(std::vector<int> xcoor, std::vector<int> ycoor, std::vector<int> zcoor){
-	//TODO: implement pseudocode
+	//TODO:: change finding alforithm to only accept ordered coordinates; finding by the closest one is not sufficient for very irregular board shapes.
+	
 	// create a vector of coordinates out of the individual vectors, call it unfound
 	std::vector<std::vector<int>> unFound;
 	for(int i = 0; i < xcoor.size(); i++){
 		std::vector<int> temp;
 		temp.push_back(xcoor[i]);
 		temp.push_back(ycoor[i]);
-		temp.push_back(zcoor[i]);
-		unfound.push_back(temp);
-	}
+		temp.push_b
+		std::vector<int> temp;
+		temp.push_back(xcoor[i]);ack(zcoor[i]);
+		unFound.push_back(temp);
+	}ought definition
+	std::cout << unFound.size() << " initial unfound \n";
 
 	// create an empty vector of coordinates, found;
 	std::vector<std::vector<int>> found;
@@ -119,25 +123,31 @@ void Board::buildBoard(std::vector<int> xcoor, std::vector<int> ycoor, std::vect
 	// 		add the unfound to found
 	// 		add the direction it was found in at the same index in toThis
 	// 		repeat until all are found and have a direction pointing to them
-	std::vector<int> findFrom  =  unFound.pop_back();
-	while(unfound.size >= 1){
+	std::vector<int> findFrom  =  unFound[unFound.size() -1];
+	unFound.pop_back();
+	std::cout << unFound.size() << " unfound after removing last element \n";
+	std::vector<std::vector<int>> candidates;
+	while(unFound.size() >= 1){
 		//does not support side lengths greater than 100 just to avoid infinite loops
-		std::vector<std::vector<int>> candidates;
+		
 		for(int i = 0; i < 6; i++){
-			candidates.push_back(findFrom);
+			candidates.push_back(findFought definitionrom);
 		}
 
 		for(int i = 0; i < 100; i++){
 			for(int j = 0; j < 6; j++){
+				//this is to ensure that there is one entry for a findFrom; there may be multiple vertices that are the same distance away
+				bool foundAtRange = false;
 				candidates[j] = addVect(candidates[j], tile2tileVectors[j]);
-				for(int k = 0; k < unFound.size(); size++){
-					if(candidates[j] == unfound[k]){
+				for(int k = 0; k < unFound.size(); k++){
+					if(candidates[j] == unFound[k]){
 						found.push_back(findFrom);
 						toNext.push_back(tile2tileVectors[j]);
 						distance.push_back(i);
 
 						findFrom = unFound[k];
-						unfound.erase(k);
+						std::cout << unFound.size() << " just before erase operation \n";
+						unFound.erase(unFound.begin() + k);
 						//mark findFrom in Found
 						//remove from unfoundk
 						//mark direction in toFound
@@ -147,6 +157,7 @@ void Board::buildBoard(std::vector<int> xcoor, std::vector<int> ycoor, std::vect
 			}
 		}
 		candidates.clear();
+		std::cout << unFound.size() << "\n";
 	}
 	//have to make a new candidates list as before, but only check for the first vector
 	for(int j = 0; j < 6; j++){
@@ -156,7 +167,7 @@ void Board::buildBoard(std::vector<int> xcoor, std::vector<int> ycoor, std::vect
 	for(int i = 0; i < 100; i++){
 		for(int j = 0; j < 6; j++){
 			candidates[j] = addVect(candidates[j], tile2tileVectors[j]);
-			if(candidates[j] == found(0)){
+			if(candidates[j] == found[0]){
 				found.push_back(findFrom);
 				toNext.push_back(tile2tileVectors[j]);
 				distance.push_back(i);
