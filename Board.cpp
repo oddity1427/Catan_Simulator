@@ -5,6 +5,7 @@
 #include <iterator>
 #include <algorithm>
 #include <iostream>
+#include <iterator> 
 
 Board::Board(){
 		//each of the following reference vector arrays is actually just 3 basis vectors mirrored, but it will be simpler to treat them as discrete directions.
@@ -35,6 +36,14 @@ Board::Board(){
 	for (std::vector<int> v : tile2roadVectors){
 		tile2tileVectors.push_back(addVect(&v, &v));
 	}
+
+//create the possible node to road vectors, actual unit vectors.
+	std::vector<int> nr_v_0 = {1,	0,	0};		node2roadVectorsPossible.push_back(nr_v_0);
+	std::vector<int> nr_v_1 = {0,	1,	0};		node2roadVectorsPossible.push_back(nr_v_1);
+	std::vector<int> nr_v_2 = {0,	0,	1};		node2roadVectorsPossible.push_back(nr_v_2);
+	std::vector<int> nr_v_3 = {-1,	0,	0};		node2roadVectorsPossible.push_back(nr_v_3);
+	std::vector<int> nr_v_4 = {0,	-1,	0};		node2roadVectorsPossible.push_back(nr_v_4);
+	std::vector<int> nr_v_5 = {0,	0,	-1};	node2roadVectorsPossible.push_back(nr_v_5);
 };
 
 void Board::buildBoard(){
@@ -84,8 +93,7 @@ void Board::buildBoard(int type, int param){
 			}
 		}
 	}
-	fillNodes();
-	fillRoads();
+	completeFromTiles();
 }
 
 void Board::buildBoard(std::vector<int> xcoor, std::vector<int> ycoor, std::vector<int> zcoor){
@@ -157,15 +165,8 @@ void Board::buildBoard(std::vector<int> xcoor, std::vector<int> ycoor, std::vect
 		}
 		std::cout << masterTiles.size() << "\n";		
 	}
-	//TODO:
-	// use found, and toTHis vectors to step through the perimeter of the board
-	// 	add the corresponding tiles to masterTiles
 
-
-	// start at the origin: must be inside
-	// create every tile next to it if it does not exist
-	// tell every node created to create nodes next to it if they do not exist.
-	// the board will now be populated
+	completeFromTiles();
 }
 
 std::vector<int> Board::addVect(std::vector<int> * vec1, std::vector<int> * vec2){
@@ -195,12 +196,36 @@ std::vector<int> Board::tileTileClockDir(std::vector<int> current){
 	return tile2tileVectors[0];
 }
 
+void Board::completeFromTiles(){
+	fillRoads();
+	fillNodes();
+
+	//TODO:for every node, if there is a road the right distance away, link both internally.
+
+}
+
+//for every adjacent road to every tile, if it does not exitst, create it.
 void Board::fillRoads(){
-	//TODO::create this algorithm
+	for(std::map<std::vector<int>, Tile *>::iterator it = masterTiles.begin(); it != masterTiles.end(); it++){
+		for(int dir = 0; dir < 6; dir++){
+			std::vector<int> candidateRoadCoor = addVect(it->first, tile2roadVectors[dir]);
+			if(masterTiles.find(candidateRoadCoor) == masterTiles.end()){
+				masterRoads[candidateRoadCoor] = new Road(candidateRoadCoor);
+			}
+		}
+	}
 }
 
 void Board::fillNodes(){
-	//TODO::create this algorithm 
+	for(std::map<std::vector<int>, Tile *>::iterator it = masterTiles.begin(); it != masterTiles.end(); it++){
+		for(int dir = 0; dir < 6; dir++){
+			std::vector<int> candidateNodeCoor = addVect(it->first, tile2nodeVectors[dir]);
+			if(masterTiles.find(candidateNodeCoor) == masterTiles.end()){
+				masterRoads[candidateNodeCoor] = new Road(candidateNodeCoor);
+				//TODO: link the node and the road internally so they can be stepped through
+			}
+		}
+	} 
 }
 
 void Board::printVect(std::vector<int> in){
