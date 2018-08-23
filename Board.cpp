@@ -167,6 +167,9 @@ void Board::buildBoard(std::vector<int> xcoor, std::vector<int> ycoor, std::vect
 	}
 
 	completeFromTiles();
+	std::cout << "tiles: " << masterTiles.size() << "\n";
+	std::cout << "roads: " << masterRoads.size() << "\n";
+	std::cout << "nodes: " << masterNodes.size() << "\n";
 }
 
 std::vector<int> Board::addVect(std::vector<int> * vec1, std::vector<int> * vec2){
@@ -201,7 +204,15 @@ void Board::completeFromTiles(){
 	fillNodes();
 
 	//TODO:for every node, if there is a road the right distance away, link both internally.
-
+	for(std::map<std::vector<int>, Node *>::iterator it = masterNodes.begin(); it != masterNodes.end(); it++){
+		for(std::vector<int> dir : node2roadVectorsPossible){
+			std::vector<int> cand = addVect(it->first, dir);
+			if(masterRoads.find(cand) != masterRoads.end()){
+				masterRoads[cand]->addNode(it->second);
+				it->second->addRoad(masterRoads[cand]);
+			}
+		}
+	}
 }
 
 //for every adjacent road to every tile, if it does not exitst, create it.
@@ -221,8 +232,11 @@ void Board::fillNodes(){
 		for(int dir = 0; dir < 6; dir++){
 			std::vector<int> candidateNodeCoor = addVect(it->first, tile2nodeVectors[dir]);
 			if(masterTiles.find(candidateNodeCoor) == masterTiles.end()){
-				masterRoads[candidateNodeCoor] = new Road(candidateNodeCoor);
-				//TODO: link the node and the road internally so they can be stepped through
+				masterNodes[candidateNodeCoor] = new Node(candidateNodeCoor);
+				
+				(it->second)->addNode(masterNodes[candidateNodeCoor]);
+				masterNodes[candidateNodeCoor]->addTile(it->second);
+
 			}
 		}
 	} 
