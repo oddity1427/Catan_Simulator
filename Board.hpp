@@ -24,8 +24,11 @@ private:
 	std::vector<int> addVect(std::vector<int>*, std::vector<int>*);
 	std::vector<int> addVect(std::vector<int>, std::vector<int>);
 	std::vector<int> tileTileClockDir(std::vector<int>);
+
+	void createTileLine(std::vector<int>, std::vector<int>, int);
 	void fillNodes();
 	void fillRoads();
+	void fillTiles(std::vector<int>);
 
 public:
 

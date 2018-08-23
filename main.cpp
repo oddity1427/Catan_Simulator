@@ -15,7 +15,6 @@ int main(){
 		y.push_back(b.tile2tileVectors[i][1]);
 		z.push_back(b.tile2tileVectors[i][2]);
 	} 
-	std::cout << x.size() << "\n" << "buildboard below \n";
 
 	b.buildBoard(x,y,z);
 	

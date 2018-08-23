@@ -142,10 +142,25 @@ void Board::buildBoard(std::vector<int> xcoor, std::vector<int> ycoor, std::vect
 		}
 	
 
+	for(int i = 0; i < distance.size(); i++){
+		createTileLine(ordered[i], toNext[i], distance[i]);
+	}
 
+	if(masterTiles.find({0,0,0}) != masterTiles.end()){
+		std::cout << "build failed; origin in perimeter of board\n";
+
+	}else{
+		if(masterTiles.size() <= 1000){
+			fillTiles({0,0,0});
+		}else{
+			std::cout << "build failed; origin outside of board or board size > 1000\n";
+		}
+		std::cout << masterTiles.size() << "\n";		
+	}
 	//TODO:
 	// use found, and toTHis vectors to step through the perimeter of the board
 	// 	add the corresponding tiles to masterTiles
+
 
 	// start at the origin: must be inside
 	// create every tile next to it if it does not exist
@@ -194,4 +209,23 @@ void Board::printVect(std::vector<int> in){
 	}
 	std::cout << " ";
 }
+
+//distance is the distance to the next tile, including the end tile. This creates the current tile, but not the destination
+void Board::createTileLine(std::vector<int> start, std::vector<int> dir, int dist){
+	std::vector<int> current = start;
+	for(int i = 0; i < dist; i++){
+		masterTiles[current] = new Tile(current);
+		current = addVect(current, dir);
+	}
+}
+
+void Board::fillTiles(std::vector<int> coor){
+	if(masterTiles.find(coor) == masterTiles.end()){
+		masterTiles[coor] = new Tile(coor);
+		for(int i = 0; i < 6; i++){
+			fillTiles(addVect(coor, tile2tileVectors[i]));
+		}
+	}
+}
+
 #endif
